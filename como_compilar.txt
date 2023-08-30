@@ -1,0 +1,17 @@
+para compilar secuencial:
+
+g++ -o nombre NOMBRE.cpp -lm        
+
+para ejecutar secuencial:
+
+./nombre
+
+---------------------------------------------
+
+para compilar paralelo:
+
+g++ -o nombre2 NOMBRE2.cpp -lm -fopenmp       // -fopenmp es para que compile con openmp
+
+para ejecutar paralelo:
+
+./nombre2
