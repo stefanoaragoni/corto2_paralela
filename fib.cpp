@@ -80,7 +80,7 @@ int fib_recursive_omp_fix(int n) {
     }
 
     int a, b;
-    int THRESHOLD = 20;
+    int THRESHOLD = 30;
 
     if (n < THRESHOLD) {
         return fib_recursive(n);
