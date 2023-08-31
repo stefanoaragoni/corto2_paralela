@@ -1,9 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <iostream>
-#include <omp.h>
+#include <fstream>
+#include <cstdlib>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctime>
+#include <algorithm>
+#include <cmath>
 #include <chrono>
-
+#include <random>
 
 int fib_recursive(int n);
 int fib_recursive_openmp(int n);
@@ -20,15 +24,21 @@ int main(int argc, char* argv[]) {
     }
 
     // Tomar el tiempo de inicio
-    std::chrono::high_resolution_clock::time_point startTime = std::chrono::high_resolution_clock::now();
+    auto start_time = std::chrono::high_resolution_clock::now();
+
 
     int b = fib_recursive(a);
     printf("El fibonacci de %d es %d\n", a, b);
 
-    // Tomar el tiempo de fin
-    std::chrono::high_resolution_clock::time_point endTime = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> totalTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime);
-    std::cout << "Tiempo de creación de partículas: " << totalTime.count() << " segundos\n";
+    // Obtenemos el tiempo de finalización
+    auto end_time = std::chrono::high_resolution_clock::now();
+
+    // Calculamos la duración total de la ejecución en segundos
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+
+    // Imprimimos el tiempo de ejecución en segundos
+    std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos." << std::endl;
+
 
     return 0;
 }
