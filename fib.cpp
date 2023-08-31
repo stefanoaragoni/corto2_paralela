@@ -26,8 +26,8 @@ int main(int argc, char* argv[]) {
     // Tomar el tiempo de inicio
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    int b = fib_recursive(a);
-    //int b = fib_recursive_openmp(a);
+    //int b = fib_recursive(a);
+    int b = fib_recursive_openmp(a);
     printf("El fibonacci de %d es %d\n", a, b);
 
     // Obtenemos el tiempo de finalización
