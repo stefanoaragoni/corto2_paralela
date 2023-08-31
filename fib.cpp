@@ -54,11 +54,13 @@ int fib_recursive_openmp(int n) {
     if (n < 2) {
         return n;
     } else {
-        #pragma omp task
-        int a = fib_recursive(n - 1);
+        int a, b;
 
         #pragma omp task
-        int b = fib_recursive(n - 2);
+        a = fib_recursive(n - 1);
+
+        #pragma omp task
+        b = fib_recursive(n - 2);
 
         #pragma omp taskwait
         return a + b;
