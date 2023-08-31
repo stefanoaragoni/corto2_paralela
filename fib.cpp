@@ -13,8 +13,6 @@ int fib_recursive(int n);
 int fib_recursive_openmp(int n);
 int fib_recursive_omp_fix(int n);
 
-int THRESHOLD = 30;
-
 int main(int argc, char* argv[]) {
     int a = 0;
 
@@ -43,7 +41,6 @@ int main(int argc, char* argv[]) {
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
     std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos." << std::endl;
-
 
     return 0;
 }
@@ -82,6 +79,7 @@ int fib_recursive_omp_fix(int n) {
     }
 
     int a, b;
+    int THRESHOLD = 20;
 
     if (n < THRESHOLD) {
         return fib_recursive(n);
