@@ -33,8 +33,8 @@ int main(int argc, char* argv[]) {
     auto start_time = std::chrono::high_resolution_clock::now();
 
     //int b = fib_recursive(a);
-    int b = fib_recursive_openmp(a);
-    //int b = fib_recursive_omp_fix(a);
+    //int b = fib_recursive_openmp(a);
+    int b = fib_recursive_omp_fix(a);
 
     printf("El fibonacci de %d es %d\n", a, b);
 
