@@ -57,10 +57,10 @@ int fib_recursive_openmp(int n) {
         int a, b;
 
         #pragma omp task shared(a)
-        a = fib_recursive(n - 1);
+        a = fib_recursive_openmp(n - 1);
 
         #pragma omp task shared(b)
-        b = fib_recursive(n - 2);
+        b = fib_recursive_openmp(n - 2);
 
         #pragma omp taskwait
         return a + b;
