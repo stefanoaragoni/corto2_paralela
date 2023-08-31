@@ -8,6 +8,7 @@
 #include <cmath>
 #include <chrono>
 #include <random>
+#include <omp.h>
 
 int fib_recursive(int n);
 int fib_recursive_openmp(int n);
@@ -32,8 +33,8 @@ int main(int argc, char* argv[]) {
     auto start_time = std::chrono::high_resolution_clock::now();
 
     //int b = fib_recursive(a);
-    //int b = fib_recursive_openmp(a);
-    int b = fib_recursive_omp_fix(a);
+    int b = fib_recursive_openmp(a);
+    //int b = fib_recursive_omp_fix(a);
 
     printf("El fibonacci de %d es %d\n", a, b);
 
