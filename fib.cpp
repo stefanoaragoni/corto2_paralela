@@ -11,6 +11,9 @@
 
 int fib_recursive(int n);
 int fib_recursive_openmp(int n);
+int fib_recursive_omp_fix(int n);
+
+int THRESHOLD = 30;
 
 int main(int argc, char* argv[]) {
     int a = 0;
@@ -23,11 +26,17 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // Cantidad de threads a usar
+    int threads = 4;
+    omp_set_num_threads(threads);
+
     // Tomar el tiempo de inicio
     auto start_time = std::chrono::high_resolution_clock::now();
 
     //int b = fib_recursive(a);
-    int b = fib_recursive_openmp(a);
+    //int b = fib_recursive_openmp(a);
+    int b = fib_recursive_omp_fix(a);
+
     printf("El fibonacci de %d es %d\n", a, b);
 
     // Obtenemos el tiempo de finalización
@@ -66,3 +75,28 @@ int fib_recursive_openmp(int n) {
         return a + b;
     }
 }
+
+int fib_recursive_omp_fix(int n) {
+    if (n < 2) {
+        return n;
+    }
+
+    int a, b;
+
+    if (n < THRESHOLD) {
+        return fib_recursive(n);
+    }
+    else {
+        #pragma omp task shared(a)
+        a = fib_recursive_openmp(n - 1);
+
+        #pragma omp task shared(b)
+        b = fib_recursive_openmp(n - 2);
+
+        #pragma omp taskwait
+        return a + b;
+    }
+
+}
+
+
