@@ -1,4 +1,7 @@
-#include <stdio.h>
+#include <iostream>
+#include <cmath>
+#include <random>
+#include <random>
 #include <omp.h>
 
 double fib_recursive(int n);
@@ -15,8 +18,15 @@ int main() {
         return 1;
     }
 
+    // Tomar el tiempo de inicio
+    std::chrono::high_resolution_clock::time_point startTime = std::chrono::high_resolution_clock::now();
+
     int b = fib_recursive(a);
     printf("El fibonacci de %d es %d\n", a, b);
+
+    std::chrono::high_resolution_clock::time_point endTime = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> totalTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime);
+    std::cout << "Tiempo de creación de partículas: " << totalTime.count() << " segundos\n";
 
 }
 
