@@ -5,7 +5,7 @@
 int fib_recursive(int n);
 int fib_recursive_openmp(int n);
 
-int main() {
+int main(int argc, char* argv[]) {
     int a = 0;
 
     // Revisa que se haya ingresado valores
