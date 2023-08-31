@@ -87,10 +87,10 @@ int fib_recursive_omp_fix(int n) {
     }
     else {
         #pragma omp task shared(a)
-        a = fib_recursive_openmp(n - 1);
+        a = fib_recursive_omp_fix(n - 1);
 
         #pragma omp task shared(b)
-        b = fib_recursive_openmp(n - 2);
+        b = fib_recursive_omp_fix(n - 2);
 
         #pragma omp taskwait
         return a + b;
