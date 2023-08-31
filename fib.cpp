@@ -26,17 +26,13 @@ int main(int argc, char* argv[]) {
     // Tomar el tiempo de inicio
     auto start_time = std::chrono::high_resolution_clock::now();
 
-
-    int b = fib_recursive(a);
+    //int b = fib_recursive(a);
+    int b = fib_recursive_openmp(a);
     printf("El fibonacci de %d es %d\n", a, b);
 
     // Obtenemos el tiempo de finalización
     auto end_time = std::chrono::high_resolution_clock::now();
-
-    // Calculamos la duración total de la ejecución en segundos
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
-
-    // Imprimimos el tiempo de ejecución en segundos
     std::cout << "Tiempo de ejecución: " << duration.count() << " microsegundos." << std::endl;
 
 
@@ -58,9 +54,13 @@ int fib_recursive_openmp(int n) {
     if (n < 2) {
         return n;
     } else {
+        #pragma omp task shared(a)
         int a = fib_recursive(n - 1);
+
+        #pragma omp task shared(b)
         int b = fib_recursive(n - 2);
 
+        #pragma omp taskwait
         return a + b;
     }
 }
